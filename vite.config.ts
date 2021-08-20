@@ -1,13 +1,21 @@
+import path from "path";
 import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import TsChecker from "vite-plugin-ts-checker";
+import { createVuePlugin } from "vite-plugin-vue2";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), TsChecker({ checker: "vue-tsc" })],
+  plugins: [createVuePlugin()],
+  assetsInclude: "src/assets/*",
   server: {
     hmr: {
       port: 443,
     },
+  },
+  resolve: {
+    alias: [
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "src"),
+      },
+    ],
   },
 });

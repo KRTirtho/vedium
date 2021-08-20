@@ -1,7 +1,21 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import path from "path";
+import { defineConfig } from "vite";
+import { createVuePlugin } from "vite-plugin-vue2";
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()]
-})
+  plugins: [createVuePlugin()],
+  assetsInclude: "src/assets/*",
+  server: {
+    hmr: {
+      port: 443,
+    },
+  },
+  resolve: {
+    alias: [
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "src"),
+      },
+    ],
+  },
+});
